@@ -11,6 +11,7 @@ async def init_db():
                 id INTEGER PRIMARY KEY,
                 ref_id INTEGER,
                 balance REAL DEFAULT 0.0,
+                discount INTEGER DEFAULT 0,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         """)
@@ -52,41 +53,52 @@ async def init_db():
             )
         """)
         await db.execute("""
-            CREATE TABLE IF NOT EXISTS subscriptions (
+            CREATE TABLE IF NOT EXISTS cart (
                 user_id INTEGER,
-                channel_id INTEGER,
-                chat_id INTEGER,
-                is_subscribed BOOLEAN DEFAULT FALSE
+                product_id INTEGER,
+                quantity INTEGER DEFAULT 1,
+                PRIMARY KEY (user_id, product_id)
             )
         """)
-        # Обновляем существующий товар
         await db.execute("""
-            UPDATE products SET category = ? WHERE id = ?
-        """, ("Обучения/Telegram", 1))
+            CREATE TABLE IF NOT EXISTS invoices (
+                invoice_id TEXT PRIMARY KEY,
+                user_id INTEGER,
+                product_id INTEGER,
+                amount REAL,
+                payload TEXT
+            )
+        """)
         # Тестовые товары
         await db.execute("""
-            INSERT OR IGNORE INTO products (id, name, desc, price, category, delivery_file)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (
-            1,
-            "Auto-Motive1 | Связка по мотивированному трафику",
-            "Бла бла бла. В комплекте софт:\n- Авто-обработка трафика\n- Авто-генерация трафика\nРезультат за месяц: *Фото*",
-            60.0,
-            "Обучения/Telegram",
-            "link_to_file.zip"
-        ))
-        await db.execute("""
-            INSERT OR IGNORE INTO products (name, desc, price, category, delivery_file)
-            VALUES (?, ?, ?, ?, ?)
-        """, (
-            "TrafficGen | Генератор трафика",
-            "Софт для автоматической генерации трафика в Telegram.\nОсобенности:\n- Настройка кампаний\n- Аналитика в реальном времени",
-            45.0,
-            "Софты/Telegram",
-            "traffic_gen.zip"
-        ))
+            INSERT OR IGNORE INTO products (id, name, desc, price, category, delivery_file) VALUES
+            (1, 'Тестовый товар 1', 'Описание тестового товара 1', 10.0, 'Софты', 'file1.txt'),
+            (2, 'Тестовый товар 2', 'Описание тестового товара 2', 20.0, 'Telegram', 'file2.txt')
+        """)
         await db.commit()
-        logging.info("Database initialized")
+
+async def use_promocode(user_id: int, code: str) -> int:
+    """Использовать промокод"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute("""
+            SELECT discount_percent, uses_count, max_uses, expiration
+            FROM promocodes WHERE code = ?
+        """, (code,))
+        promo = await cursor.fetchone()
+        if promo and promo[1] < promo[2]:
+            discount, uses_count, max_uses, expiration = promo
+            from datetime import datetime
+            if expiration and datetime.strptime(expiration, "%Y-%m-%d %H:%M:%S") < datetime.now():
+                return 0
+            await db.execute("""
+                UPDATE promocodes SET uses_count = uses_count + 1 WHERE code = ?
+            """, (code,))
+            await db.execute("""
+                UPDATE users SET discount = ? WHERE id = ?
+            """, (discount, user_id))
+            await db.commit()
+            return discount
+        return 0
 
 
 async def get_purchases_count(user_id: int) -> int:
@@ -103,13 +115,14 @@ async def get_cart_items(user_id: int) -> list:
 async def get_user(user_id: int) -> dict:
     """Получить данные юзера"""
     async with aiosqlite.connect(DB_PATH) as db:
-        cursor = await db.execute("SELECT * FROM users WHERE id = ?", (user_id,))
+        cursor = await db.execute("SELECT id, ref_id, balance, discount FROM users WHERE id = ?", (user_id,))
         user = await cursor.fetchone()
         if user:
             return {
                 "id": user[0],
                 "ref_id": user[1],
                 "balance": user[2],
+                "discount": user[3] or 0,
                 "referrals_count": await get_referrals_count(user_id),
                 "earnings": await get_referrals_earnings(user_id)
             }
