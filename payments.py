@@ -9,11 +9,12 @@ async def send_payment_request(bot: Bot, user_id: int, product_id: int, amount_u
     url = "https://pay.crypt.bot/api/createInvoice"
     headers = {"Crypto-Pay-API-Token": CRYPTOBOT_TOKEN}
     payload = {
-        "amount": amount_usd,
+        "amount": str(amount_usd),
         "currency": "USD",
+        "asset": "USDT",  # Фиксируем USDT как единственный актив
         "description": f"Покупка товара #{product_id}",
         "payload": f"{user_id}_{product_id}",
-        "allowed_assets": ["BTC", "USDT", "TON"]
+        "allowed_assets": ["USDT"]  # Ограничиваем только USDT
     }
     try:
         response = requests.post(url, headers=headers, json=payload)
@@ -23,12 +24,11 @@ async def send_payment_request(bot: Bot, user_id: int, product_id: int, amount_u
             invoice_id = invoice["result"]["invoice_id"]
             payment_url = invoice["result"]["pay_url"]
             kb = InlineKeyboardMarkup(inline_keyboard=[
-                [InlineKeyboardButton(text="Оплатить", url=payment_url)],
-                [InlineKeyboardButton(text="Проверить оплату", callback_data=f"check_payment_{invoice_id}")]
+                [InlineKeyboardButton(text="Оплатить", url=payment_url)]
             ])
             await bot.send_message(
                 user_id,
-                f"Оплати {amount_usd}$ за товар #{product_id}. Выбери валюту (BTC, USDT, TON):",
+                f"Оплати {amount_usd}$ за товар #{product_id} в USDT:",
                 reply_markup=kb
             )
             return invoice_id

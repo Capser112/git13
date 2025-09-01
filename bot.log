@@ -1161,3 +1161,887 @@ aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientConnectionErro
 2025-09-01 17:31:05,943 - aiogram.dispatcher - WARNING - Received SIGINT signal
 2025-09-01 17:31:05,944 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
 2025-09-01 17:31:05,944 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 17:31:19,163 - __main__ - INFO - Starting bot...
+2025-09-01 17:31:26,800 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 17:31:27,034 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:44:15,679 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:44:15,686 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:44:15,687 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:50:20,567 - __main__ - INFO - Starting bot...
+2025-09-01 18:50:32,140 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:50:32,363 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:50:33,510 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:50:33,511 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:50:33,512 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:50:33,558 - root - ERROR - Error checking subscription: HTTP Client says - ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2716)
+2025-09-01 18:50:33,655 - root - ERROR - Error checking subscription: HTTP Client says - ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2716)
+2025-09-01 18:50:33,764 - aiogram.event - INFO - Update id=555107651 is not handled. Duration 1153 ms by bot id=7972084652
+2025-09-01 18:50:34,014 - aiogram.event - INFO - Update id=555107652 is not handled. Duration 1403 ms by bot id=7972084652
+2025-09-01 18:50:35,616 - __main__ - INFO - Starting bot...
+2025-09-01 18:50:36,588 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:50:36,822 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:50:40,930 - aiogram.event - INFO - Update id=555107653 is handled. Duration 1214 ms by bot id=7972084652
+2025-09-01 18:50:53,301 - aiogram.event - INFO - Update id=555107654 is handled. Duration 996 ms by bot id=7972084652
+2025-09-01 18:50:58,432 - aiogram.event - INFO - Update id=555107655 is not handled. Duration 726 ms by bot id=7972084652
+2025-09-01 18:50:58,432 - aiogram.event - ERROR - Cause exception while process update id=555107655 by bot id=7972084652
+ValidationError: 1 validation error for EditMessageText
+reply_markup
+  Input should be a valid dictionary or instance of InlineKeyboardMarkup [type=model_type, input_value=ReplyKeyboardMarkup(keybo...er=None, selective=None), input_type=ReplyKeyboardMarkup]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 78, in check_subscription_callback
+    await callback.message.edit_text(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/types/message.py", line 3316, in edit_text
+    return EditMessageText(
+           ^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for EditMessageText
+reply_markup
+  Input should be a valid dictionary or instance of InlineKeyboardMarkup [type=model_type, input_value=ReplyKeyboardMarkup(keybo...er=None, selective=None), input_type=ReplyKeyboardMarkup]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+2025-09-01 18:51:45,738 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:51:45,738 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:51:45,739 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:51:47,965 - __main__ - INFO - Starting bot...
+2025-09-01 18:51:51,911 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:51:52,137 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:52:52,596 - aiogram.event - INFO - Update id=555107657 is handled. Duration 2197 ms by bot id=7972084652
+2025-09-01 18:52:53,636 - aiogram.event - INFO - Update id=555107656 is handled. Duration 9104 ms by bot id=7972084652
+2025-09-01 18:53:22,998 - aiogram.event - INFO - Update id=555107658 is handled. Duration 2497 ms by bot id=7972084652
+2025-09-01 18:53:28,632 - aiogram.event - INFO - Update id=555107659 is handled. Duration 271 ms by bot id=7972084652
+2025-09-01 18:53:30,988 - aiogram.event - INFO - Update id=555107660 is not handled. Duration 10 ms by bot id=7972084652
+2025-09-01 18:53:30,988 - aiogram.event - ERROR - Cause exception while process update id=555107660 by bot id=7972084652
+OperationalError: no such column: created_at
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/admin.py", line 484, in stats
+    cursor = await db.execute("SELECT COUNT(*) FROM orders WHERE status = 'completed' AND created_at >= ?", (datetime.now() - timedelta(days=30),))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 132, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 115, in run
+    result = function()
+             ^^^^^^^^^^
+sqlite3.OperationalError: no such column: created_at
+2025-09-01 18:53:52,767 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:53:52,768 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:53:52,768 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:53:55,061 - __main__ - INFO - Starting bot...
+2025-09-01 18:54:00,569 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:54:00,796 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:54:09,923 - aiogram.event - INFO - Update id=555107661 is handled. Duration 1894 ms by bot id=7972084652
+2025-09-01 18:54:14,536 - aiogram.event - INFO - Update id=555107662 is not handled. Duration 510 ms by bot id=7972084652
+2025-09-01 18:54:14,536 - aiogram.event - ERROR - Cause exception while process update id=555107662 by bot id=7972084652
+ValidationError: 1 validation error for EditMessageText
+reply_markup
+  Input should be a valid dictionary or instance of InlineKeyboardMarkup [type=model_type, input_value=ReplyKeyboardMarkup(keybo...er=None, selective=None), input_type=ReplyKeyboardMarkup]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 77, in check_subscription_callback
+    await callback.message.edit_text(
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/types/message.py", line 3316, in edit_text
+    return EditMessageText(
+           ^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/pydantic/main.py", line 164, in __init__
+    __pydantic_self__.__pydantic_validator__.validate_python(data, self_instance=__pydantic_self__)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for EditMessageText
+reply_markup
+  Input should be a valid dictionary or instance of InlineKeyboardMarkup [type=model_type, input_value=ReplyKeyboardMarkup(keybo...er=None, selective=None), input_type=ReplyKeyboardMarkup]
+    For further information visit https://errors.pydantic.dev/2.5/v/model_type
+2025-09-01 18:55:43,781 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:55:43,781 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:55:43,781 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:55:45,894 - __main__ - INFO - Starting bot...
+2025-09-01 18:55:46,826 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:55:47,058 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:55:50,242 - aiogram.event - INFO - Update id=555107663 is handled. Duration 1258 ms by bot id=7972084652
+2025-09-01 18:55:52,850 - aiogram.event - INFO - Update id=555107664 is handled. Duration 1096 ms by bot id=7972084652
+2025-09-01 18:55:56,809 - aiogram.event - INFO - Update id=555107665 is handled. Duration 1342 ms by bot id=7972084652
+2025-09-01 18:57:53,652 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 18:57:53,652 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:57:53,652 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 18:57:55,585 - __main__ - INFO - Starting bot...
+2025-09-01 18:58:05,662 - asyncio - ERROR - Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x7f97dafb6210>
+2025-09-01 18:58:07,724 - __main__ - INFO - Starting bot...
+2025-09-01 18:58:09,874 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 18:58:10,097 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 18:58:11,610 - aiogram.event - INFO - Update id=555107666 is handled. Duration 1275 ms by bot id=7972084652
+2025-09-01 18:58:12,863 - aiogram.event - INFO - Update id=555107667 is handled. Duration 1607 ms by bot id=7972084652
+2025-09-01 18:58:15,784 - aiogram.event - INFO - Update id=555107668 is handled. Duration 1251 ms by bot id=7972084652
+2025-09-01 18:59:20,545 - aiogram.event - INFO - Update id=555107669 is handled. Duration 2438 ms by bot id=7972084652
+2025-09-01 18:59:58,740 - aiogram.event - INFO - Update id=555107670 is handled. Duration 1939 ms by bot id=7972084652
+2025-09-01 19:00:19,404 - aiogram.event - INFO - Update id=555107671 is handled. Duration 1656 ms by bot id=7972084652
+2025-09-01 19:00:21,819 - aiogram.event - INFO - Update id=555107672 is handled. Duration 369 ms by bot id=7972084652
+2025-09-01 19:00:23,064 - aiogram.event - INFO - Update id=555107673 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 19:00:30,289 - aiogram.event - INFO - Update id=555107674 is handled. Duration 559 ms by bot id=7972084652
+2025-09-01 19:00:31,640 - aiogram.event - INFO - Update id=555107675 is handled. Duration 250 ms by bot id=7972084652
+2025-09-01 19:00:32,395 - aiogram.event - INFO - Update id=555107676 is not handled. Duration 5 ms by bot id=7972084652
+2025-09-01 19:00:36,504 - aiogram.event - INFO - Update id=555107677 is handled. Duration 514 ms by bot id=7972084652
+2025-09-01 19:02:29,743 - aiogram.event - INFO - Update id=555107678 is handled. Duration 1694 ms by bot id=7972084652
+2025-09-01 19:02:32,830 - aiogram.event - INFO - Update id=555107679 is handled. Duration 1721 ms by bot id=7972084652
+2025-09-01 19:02:44,306 - aiogram.event - INFO - Update id=555107680 is not handled. Duration 5 ms by bot id=7972084652
+2025-09-01 19:02:52,193 - aiogram.event - INFO - Update id=555107681 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 19:02:53,494 - aiogram.event - INFO - Update id=555107683 is not handled. Duration 5 ms by bot id=7972084652
+2025-09-01 19:03:02,806 - root - ERROR - Error checking subscription: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-09-01 19:03:02,808 - root - ERROR - Error checking subscription: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-09-01 19:03:02,809 - root - ERROR - Error checking subscription: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-09-01 19:03:02,809 - root - ERROR - Error checking subscription: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-09-01 19:03:02,810 - root - ERROR - Error checking subscription: HTTP Client says - ClientConnectorError: Cannot connect to host api.telegram.org:443 ssl:default [Temporary failure in name resolution]
+2025-09-01 19:03:03,877 - aiogram.event - INFO - Update id=555107684 is not handled. Duration 10069 ms by bot id=7972084652
+2025-09-01 19:03:03,877 - aiogram.event - ERROR - Cause exception while process update id=555107684 by bot id=7972084652
+TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 356, in top_up
+    await callback.message.edit_text(
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message is not modified: specified new message content and reply markup are exactly the same as a current content and reply markup of the message
+2025-09-01 19:03:03,934 - aiogram.event - INFO - Update id=555107686 is handled. Duration 5381 ms by bot id=7972084652
+2025-09-01 19:03:03,962 - aiogram.event - INFO - Update id=555107687 is handled. Duration 1235 ms by bot id=7972084652
+2025-09-01 19:03:04,060 - aiogram.event - INFO - Update id=555107682 is handled. Duration 11261 ms by bot id=7972084652
+2025-09-01 19:03:04,572 - aiogram.event - INFO - Update id=555107688 is handled. Duration 246 ms by bot id=7972084652
+2025-09-01 19:03:05,058 - aiogram.event - INFO - Update id=555107685 is handled. Duration 8962 ms by bot id=7972084652
+2025-09-01 19:03:07,910 - aiogram.event - INFO - Update id=555107689 is handled. Duration 839 ms by bot id=7972084652
+2025-09-01 19:03:15,358 - aiogram.event - INFO - Update id=555107690 is handled. Duration 1112 ms by bot id=7972084652
+2025-09-01 19:03:16,643 - aiogram.event - INFO - Update id=555107691 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 19:03:38,791 - aiogram.event - INFO - Update id=555107692 is handled. Duration 2952 ms by bot id=7972084652
+2025-09-01 19:03:42,498 - root - ERROR - Error creating invoice: 400 Client Error: Bad Request for url: https://pay.crypt.bot/api/createInvoice, Response: {"ok":false,"error":{"code":400,"name":"ASSET_REQUIRED"}}
+2025-09-01 19:03:42,743 - aiogram.event - INFO - Update id=555107693 is handled. Duration 1073 ms by bot id=7972084652
+2025-09-01 19:04:23,378 - aiogram.event - INFO - Update id=555107694 is handled. Duration 947 ms by bot id=7972084652
+2025-09-01 19:04:28,519 - aiogram.event - INFO - Update id=555107695 is handled. Duration 460 ms by bot id=7972084652
+2025-09-01 19:04:35,355 - aiogram.event - INFO - Update id=555107696 is handled. Duration 253 ms by bot id=7972084652
+2025-09-01 19:05:15,468 - aiogram.event - INFO - Update id=555107697 is handled. Duration 1090 ms by bot id=7972084652
+2025-09-01 19:06:09,023 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 19:06:09,024 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 19:06:09,025 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 19:06:11,139 - __main__ - INFO - Starting bot...
+2025-09-01 19:06:12,053 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 19:06:12,288 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 19:06:22,015 - aiogram.event - INFO - Update id=555107698 is handled. Duration 781 ms by bot id=7972084652
+2025-09-01 19:06:26,775 - aiogram.event - INFO - Update id=555107699 is handled. Duration 284 ms by bot id=7972084652
+2025-09-01 19:06:28,602 - root - INFO - Product deleted: Жопка by user 1034389626
+2025-09-01 19:06:28,895 - aiogram.event - INFO - Update id=555107700 is handled. Duration 314 ms by bot id=7972084652
+2025-09-01 19:06:30,402 - aiogram.event - INFO - Update id=555107701 is handled. Duration 352 ms by bot id=7972084652
+2025-09-01 19:06:37,646 - aiogram.event - INFO - Update id=555107702 is handled. Duration 259 ms by bot id=7972084652
+2025-09-01 19:06:39,831 - aiogram.event - INFO - Update id=555107703 is handled. Duration 297 ms by bot id=7972084652
+2025-09-01 19:06:42,020 - aiogram.event - INFO - Update id=555107704 is handled. Duration 249 ms by bot id=7972084652
+2025-09-01 19:06:44,445 - aiogram.event - INFO - Update id=555107705 is handled. Duration 321 ms by bot id=7972084652
+2025-09-01 19:06:46,256 - aiogram.event - INFO - Update id=555107706 is handled. Duration 335 ms by bot id=7972084652
+2025-09-01 19:06:48,233 - aiogram.event - INFO - Update id=555107707 is not handled. Duration 6 ms by bot id=7972084652
+2025-09-01 19:06:48,233 - aiogram.event - ERROR - Cause exception while process update id=555107707 by bot id=7972084652
+OperationalError: no such column: created_at
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/admin.py", line 484, in stats
+    cursor = await db.execute("SELECT COUNT(*) FROM orders WHERE status = 'completed' AND created_at >= ?", (datetime.now() - timedelta(days=30),))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 132, in _execute
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 115, in run
+    result = function()
+             ^^^^^^^^^^
+sqlite3.OperationalError: no such column: created_at
+2025-09-01 20:05:01,919 - aiogram.event - INFO - Update id=555107708 is not handled. Duration 5 ms by bot id=7972084652
+2025-09-01 20:05:38,700 - aiogram.event - INFO - Update id=555107709 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 20:05:59,633 - aiogram.event - INFO - Update id=555107710 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 20:06:54,615 - aiogram.event - INFO - Update id=555107711 is not handled. Duration 4 ms by bot id=7972084652
+2025-09-01 20:06:56,211 - aiogram.event - INFO - Update id=555107712 is not handled. Duration 6 ms by bot id=7972084652
+2025-09-01 20:08:55,547 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 20:08:55,547 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:08:55,548 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 20:08:57,732 - __main__ - INFO - Starting bot...
+2025-09-01 20:08:58,752 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 20:08:58,991 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:09:28,676 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 20:09:28,676 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:09:28,676 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 20:10:23,733 - __main__ - INFO - Starting bot...
+2025-09-01 20:10:24,861 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 20:10:25,085 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:11:06,582 - aiogram.event - INFO - Update id=555107713 is handled. Duration 1469 ms by bot id=7972084652
+2025-09-01 20:11:10,411 - aiogram.event - INFO - Update id=555107714 is not handled. Duration 485 ms by bot id=7972084652
+2025-09-01 20:11:10,411 - aiogram.event - ERROR - Cause exception while process update id=555107714 by bot id=7972084652
+ValueError: no active connection
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 164, in products_command
+    cursor = await db.execute("SELECT id, name FROM products WHERE category = ? AND price = 0", (category,))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+                                 ^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 83, in _conn
+    raise ValueError("no active connection")
+ValueError: no active connection
+2025-09-01 20:11:20,012 - aiogram.event - INFO - Update id=555107715 is not handled. Duration 478 ms by bot id=7972084652
+2025-09-01 20:11:20,012 - aiogram.event - ERROR - Cause exception while process update id=555107715 by bot id=7972084652
+ValueError: no active connection
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 164, in products_command
+    cursor = await db.execute("SELECT id, name FROM products WHERE category = ? AND price = 0", (category,))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+                                 ^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 83, in _conn
+    raise ValueError("no active connection")
+ValueError: no active connection
+2025-09-01 20:11:22,726 - aiogram.event - INFO - Update id=555107716 is not handled. Duration 498 ms by bot id=7972084652
+2025-09-01 20:11:22,727 - aiogram.event - ERROR - Cause exception while process update id=555107716 by bot id=7972084652
+ValueError: no active connection
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 164, in products_command
+    cursor = await db.execute("SELECT id, name FROM products WHERE category = ? AND price = 0", (category,))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+                                 ^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 83, in _conn
+    raise ValueError("no active connection")
+ValueError: no active connection
+2025-09-01 20:11:38,866 - aiogram.event - INFO - Update id=555107717 is handled. Duration 1177 ms by bot id=7972084652
+2025-09-01 20:11:42,264 - aiogram.event - INFO - Update id=555107718 is handled. Duration 264 ms by bot id=7972084652
+2025-09-01 20:11:47,526 - aiogram.event - INFO - Update id=555107719 is handled. Duration 310 ms by bot id=7972084652
+2025-09-01 20:11:53,681 - aiogram.event - INFO - Update id=555107720 is handled. Duration 334 ms by bot id=7972084652
+2025-09-01 20:12:01,944 - aiogram.event - INFO - Update id=555107721 is handled. Duration 463 ms by bot id=7972084652
+2025-09-01 20:12:04,208 - aiogram.event - INFO - Update id=555107722 is handled. Duration 275 ms by bot id=7972084652
+2025-09-01 20:12:08,427 - aiogram.event - INFO - Update id=555107723 is handled. Duration 265 ms by bot id=7972084652
+2025-09-01 20:12:12,010 - aiogram.event - INFO - Update id=555107724 is handled. Duration 366 ms by bot id=7972084652
+2025-09-01 20:12:14,255 - root - INFO - Product added: Граббер by user 1034389626
+2025-09-01 20:12:14,821 - aiogram.event - INFO - Update id=555107725 is handled. Duration 593 ms by bot id=7972084652
+2025-09-01 20:12:16,422 - aiogram.event - INFO - Update id=555107726 is handled. Duration 254 ms by bot id=7972084652
+2025-09-01 20:12:19,598 - aiogram.event - INFO - Update id=555107727 is not handled. Duration 470 ms by bot id=7972084652
+2025-09-01 20:12:19,598 - aiogram.event - ERROR - Cause exception while process update id=555107727 by bot id=7972084652
+ValueError: no active connection
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 164, in products_command
+    cursor = await db.execute("SELECT id, name FROM products WHERE category = ? AND price = 0", (category,))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 193, in execute
+    cursor = await self._execute(self._conn.execute, sql, parameters)
+                                 ^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiosqlite/core.py", line 83, in _conn
+    raise ValueError("no active connection")
+ValueError: no active connection
+2025-09-01 20:12:26,987 - aiogram.event - INFO - Update id=555107728 is not handled. Duration 244 ms by bot id=7972084652
+2025-09-01 20:12:26,987 - aiogram.event - ERROR - Cause exception while process update id=555107728 by bot id=7972084652
+TelegramBadRequest: Telegram server says - Bad Request: can't parse entities: Character '.' is reserved and must be escaped with the preceding '\'
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/admin.py", line 528, in stats
+    await callback.message.edit_text(text, reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: can't parse entities: Character '.' is reserved and must be escaped with the preceding '\'
+2025-09-01 20:14:56,166 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 20:14:56,167 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:14:56,167 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 20:20:25,739 - __main__ - INFO - Starting bot...
+2025-09-01 20:20:26,689 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 20:20:26,939 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:20:35,631 - aiogram.event - INFO - Update id=555107729 is handled. Duration 1962 ms by bot id=7972084652
+2025-09-01 20:20:43,062 - aiogram.event - INFO - Update id=555107730 is handled. Duration 278 ms by bot id=7972084652
+2025-09-01 20:20:47,807 - aiogram.event - INFO - Update id=555107731 is not handled. Duration 522 ms by bot id=7972084652
+2025-09-01 20:20:47,808 - aiogram.event - ERROR - Cause exception while process update id=555107731 by bot id=7972084652
+TelegramBadRequest: Telegram server says - Bad Request: message to edit not found
+Traceback (most recent call last):
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/bot.py", line 269, in back_to_subcategory
+    await show_products(callback, bot, state, category, subcategory)
+  File "/home/vanya/ShopZone/bot.py", line 235, in show_products
+    await callback.message.edit_text(text, reply_markup=kb)
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+           ^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "/home/vanya/ShopZone/venv/lib/python3.11/site-packages/aiogram/client/session/base.py", line 120, in check_response
+    raise TelegramBadRequest(method=method, message=description)
+aiogram.exceptions.TelegramBadRequest: Telegram server says - Bad Request: message to edit not found
+2025-09-01 20:20:50,415 - aiogram.event - INFO - Update id=555107732 is handled. Duration 983 ms by bot id=7972084652
+2025-09-01 20:20:53,821 - aiogram.event - INFO - Update id=555107733 is handled. Duration 306 ms by bot id=7972084652
+2025-09-01 20:20:56,855 - aiogram.event - INFO - Update id=555107734 is handled. Duration 1400 ms by bot id=7972084652
+2025-09-01 20:22:03,154 - aiogram.event - INFO - Update id=555107735 is handled. Duration 1749 ms by bot id=7972084652
+2025-09-01 20:22:04,956 - aiogram.event - INFO - Update id=555107736 is handled. Duration 247 ms by bot id=7972084652
+2025-09-01 20:22:07,292 - root - INFO - Broadcast sent to 1/1 users by 1034389626
+2025-09-01 20:22:07,585 - aiogram.event - INFO - Update id=555107737 is handled. Duration 568 ms by bot id=7972084652
+2025-09-01 20:22:10,202 - aiogram.event - INFO - Update id=555107738 is handled. Duration 314 ms by bot id=7972084652
+2025-09-01 20:22:15,173 - aiogram.event - INFO - Update id=555107739 is handled. Duration 288 ms by bot id=7972084652
+2025-09-01 20:41:26,000 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 20:41:26,001 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:41:26,001 - aiogram.dispatcher - INFO - Polling stopped
+2025-09-01 20:41:27,984 - __main__ - INFO - Starting bot...
+2025-09-01 20:41:28,974 - aiogram.dispatcher - INFO - Start polling
+2025-09-01 20:41:29,209 - aiogram.dispatcher - INFO - Run polling for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:41:39,033 - aiogram.event - INFO - Update id=555107740 is handled. Duration 1258 ms by bot id=7972084652
+2025-09-01 20:41:41,555 - aiogram.event - INFO - Update id=555107741 is handled. Duration 804 ms by bot id=7972084652
+2025-09-01 20:41:51,549 - aiogram.event - INFO - Update id=555107742 is not handled. Duration 11 ms by bot id=7972084652
+2025-09-01 20:48:17,396 - aiogram.dispatcher - WARNING - Received SIGINT signal
+2025-09-01 20:48:17,397 - aiogram.dispatcher - INFO - Polling stopped for bot @ShopZoneRobot id=7972084652 - 'ShopZone | Легендарный магазин by DROPZONE'
+2025-09-01 20:48:17,397 - aiogram.dispatcher - INFO - Polling stopped

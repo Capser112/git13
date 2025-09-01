@@ -56,8 +56,7 @@ def get_subscription_keyboard() -> InlineKeyboardMarkup:
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="Подписаться на канал", url=CHANNEL_INVITE)],
         [InlineKeyboardButton(text="Подписаться на чат", url=CHAT_INVITE)],
-        [InlineKeyboardButton(text="Проверить подписку", callback_data="check_subscription")],
-        [InlineKeyboardButton(text="Назад", callback_data="back_to_start")]
+        [InlineKeyboardButton(text="Проверить подписку", callback_data="check_subscription")]
     ])
 
 async def check_subscription(bot: Bot, user_id: int) -> bool:
@@ -75,7 +74,9 @@ async def check_subscription_callback(callback: CallbackQuery, bot: Bot, state: 
     user_id = callback.from_user.id
     if await check_subscription(bot, user_id):
         is_admin = user_id == ADMIN_ID
-        await callback.message.edit_text(
+        await callback.message.delete()  # Удаляем старое сообщение
+        await bot.send_message(
+            user_id,
             "Спасибо за подписку! Выбери действие:",
             reply_markup=get_main_menu(is_admin)
         )
@@ -85,8 +86,7 @@ async def check_subscription_callback(callback: CallbackQuery, bot: Bot, state: 
         kb = InlineKeyboardMarkup(inline_keyboard=[
             [InlineKeyboardButton(text="Подписаться на канал", url=CHANNEL_INVITE)],
             [InlineKeyboardButton(text="Подписаться на чат", url=CHAT_INVITE)],
-            [InlineKeyboardButton(text="Проверить подписку", callback_data="check_subscription")],
-            [InlineKeyboardButton(text="Назад", callback_data="back_to_start")]
+            [InlineKeyboardButton(text="Проверить подписку", callback_data="check_subscription")]
         ])
         await callback.answer(
             "Ты ещё не подписан на канал или чат! Подпишись и попробуй снова.",
@@ -157,7 +157,21 @@ async def products_command(message: Message, bot: Bot, state: FSMContext):
         await message.answer("Каталог пуст.", reply_markup=get_main_menu(is_admin))
         return
     
-    kb_buttons = [[InlineKeyboardButton(text=cat, callback_data=f"category_{cat}")] for cat in categories]
+    kb_buttons = []
+    async with aiosqlite.connect(DB_PATH) as db:
+        for category in categories:
+            if category == "Бесплатное":
+                cursor = await db.execute("SELECT id, name FROM products WHERE category = ? AND price = 0", (category,))
+                products = await cursor.fetchall()
+                product_buttons = [InlineKeyboardButton(text=product[1], callback_data=f"product_{product[0]}") for product in products]
+                kb_buttons.extend([product_buttons[i:i + 2] for i in range(0, len(product_buttons), 2)])
+            else:
+                cursor = await db.execute("SELECT DISTINCT subcategory FROM products WHERE category = ? AND subcategory IS NOT NULL", (category,))
+                subcategories = [row[0] for row in await cursor.fetchall()]
+                kb_buttons.append([InlineKeyboardButton(text=category, callback_data=f"category_{category}")])
+                sub_buttons = [InlineKeyboardButton(text=subcat, callback_data=f"subcat_{category}_{subcat}") for subcat in subcategories]
+                kb_buttons.extend([sub_buttons[i:i + 2] for i in range(0, len(sub_buttons), 2)])
+    
     kb_buttons.append([InlineKeyboardButton(text="Назад", callback_data="back_to_main")])
     kb = InlineKeyboardMarkup(inline_keyboard=kb_buttons)
     await message.answer("Каталог:", reply_markup=kb)
@@ -198,36 +212,42 @@ async def show_subcategories(callback: CallbackQuery, bot: Bot, state: FSMContex
 
 async def show_products(callback: CallbackQuery, bot: Bot, state: FSMContext, category: str, subcategory: str = None):
     async with aiosqlite.connect(DB_PATH) as db:
+        query = "SELECT id, name, price, desc FROM products WHERE category = ?"
+        params = [category]
         if subcategory:
-            cursor = await db.execute("SELECT id, name, price FROM products WHERE category = ? AND subcategory = ?", (category, subcategory,))
-        else:
-            cursor = await db.execute("SELECT id, name, price FROM products WHERE category = ?", (category,))
+            query += " AND subcategory = ?"
+            params.append(subcategory)
+        cursor = await db.execute(query, params)
         products = await cursor.fetchall()
     
-    user = await get_user(callback.from_user.id)
-    discount = user['discount'] if user else 0
+    if not products:
+        await callback.message.edit_text("Товары не найдены.", reply_markup=InlineKeyboardMarkup(inline_keyboard=[
+            [InlineKeyboardButton(text="Назад", callback_data="back_to_catalog")]
+        ]))
+        return
     
-    text = f"Продукты в категории {category}{f' ({subcategory})' if subcategory else ''}:\n\n"
-    kb_buttons = []
+    kb = InlineKeyboardMarkup(inline_keyboard=[])
     for product in products:
-        product_id, name, price = product
-        final_price = price * (1 - discount / 100)
-        kb_buttons.append([InlineKeyboardButton(text=f"{name} {final_price}$", callback_data=f"product_{product_id}")])
+        product_id, name, price, desc = product
+        button_text = f"{name} ({price}$)" if price > 0 else name
+        kb.inline_keyboard.append([InlineKeyboardButton(text=button_text, callback_data=f"product_{product_id}")])
+    kb.inline_keyboard.append([InlineKeyboardButton(text="Назад", callback_data="back_to_catalog" if not subcategory else f"back_to_category_{category}")])
     
-    kb_buttons.append([InlineKeyboardButton(text="Назад", callback_data=f"back_to_subcategory_{category}_{subcategory}" if subcategory else "back_to_catalog")])
-    kb = InlineKeyboardMarkup(inline_keyboard=kb_buttons)
-    await callback.message.edit_text(text, reply_markup=kb)
-    await state.set_state(CatalogStates.PRODUCT)
+    text = f"Товары в категории: {category}" + (f" / {subcategory}" if subcategory else "")
+    try:
+        await callback.message.edit_text(text, reply_markup=kb)
+    except aiogram.exceptions.TelegramBadRequest:
+        await bot.send_message(callback.from_user.id, text, reply_markup=kb)
 
 @router.callback_query(F.data.startswith("product_"))
 async def show_product_card(callback: CallbackQuery, bot: Bot, state: FSMContext):
     product_id = int(callback.data.split("_")[1])
     async with aiosqlite.connect(DB_PATH) as db:
-        cursor = await db.execute("SELECT name, desc, price, category, subcategory FROM products WHERE id = ?", (product_id,))
+        cursor = await db.execute("SELECT name, desc, price, category, subcategory, delivery_file, custom_message FROM products WHERE id = ?", (product_id,))
         product = await cursor.fetchone()
     
     if product:
-        name, desc, price, category, subcategory = product
+        name, desc, price, category, subcategory, delivery_file, custom_message = product
         user = await get_user(callback.from_user.id)
         discount = user['discount'] if user else 0
         final_price = price * (1 - discount / 100)
@@ -240,7 +260,7 @@ async def show_product_card(callback: CallbackQuery, bot: Bot, state: FSMContext
             [InlineKeyboardButton(text="Назад", callback_data=f"back_to_subcategory_{category}_{subcategory}" if subcategory else f"back_to_category_{category}")]
         ])
         await callback.message.edit_text(text, reply_markup=kb)
-        await state.update_data(category=category, subcategory=subcategory)
+        await state.update_data(category=category, subcategory=subcategory, product_id=product_id, delivery_file=delivery_file, custom_message=custom_message)
         await state.set_state(CatalogStates.PRODUCT)
     else:
         await callback.answer("Товар не найден.", show_alert=True)
@@ -263,6 +283,7 @@ async def back_to_catalog(callback: CallbackQuery, bot: Bot, state: FSMContext):
     await callback.message.delete()
     await show_categories(callback.message, bot, state)
 
+
 @router.message(Command("profile"))
 @router.message(F.text == "Профиль")
 async def profile_command(message: Message, bot: Bot):
@@ -279,8 +300,11 @@ async def profile_command(message: Message, bot: Bot):
         await message.answer("Ошибка: пользователь не найден.", reply_markup=get_main_menu(is_admin))
         return
     
+    # Ручное экранирование специальных символов для Markdown
     username = message.from_user.username or "Не указан"
+    username = username.replace("_", "\_").replace("*", "\*").replace("`", "\`")
     ref_link = f"t.me/{(await bot.get_me()).username}?start=ref_{message.from_user.id}"
+    ref_link = ref_link.replace("_", "\_").replace("*", "\*").replace("`", "\`")
     purchases_count = await get_purchases_count(message.from_user.id)
     is_admin = message.from_user.id == ADMIN_ID
     
@@ -301,7 +325,8 @@ async def profile_command(message: Message, bot: Bot):
         f"Реферальная ссылка: {ref_link}\n"
         f"Рефералов приглашено: {user['referrals_count']}\n"
         f"Заработано на рефералах: {user['earnings']}$",
-        reply_markup=kb
+        reply_markup=kb,
+        parse_mode="Markdown"
     )
 
 @router.message(Command("cart"))
@@ -393,22 +418,43 @@ async def buy_product(callback: CallbackQuery, bot: Bot, state: FSMContext):
         return
     
     product_id = int(callback.data.split("_")[2])
+    data = await state.get_data()  # Получаем данные из state (delivery_file и custom_message)
+    delivery_file = data.get('delivery_file')
+    custom_message = data.get('custom_message')
+    
     async with aiosqlite.connect(DB_PATH) as db:
-        cursor = await db.execute("SELECT id, price, name FROM products WHERE id = ?", (product_id,))
+        cursor = await db.execute("SELECT id, price, name, delivery_file FROM products WHERE id = ?", (product_id,))
         product = await cursor.fetchone()
         if product:
-            product_id, amount_usd, name = product
+            product_id, price, name, db_delivery_file = product  # Сохраняем delivery_file из БД
+            delivery_file = delivery_file or db_delivery_file  # Используем из state, если есть
             user = await get_user(user_id)
             discount = user['discount'] if user else 0
-            amount_usd = amount_usd * (1 - discount / 100)
-            invoice_id = await send_payment_request(bot, user_id, product_id, amount_usd)
+            final_price = price * (1 - discount / 100)
+            
+            if final_price == 0:
+                await db.execute(
+                    "INSERT INTO orders (user_id, product_id, amount, status) VALUES (?, ?, ?, ?)",
+                    (user_id, product_id, 0, "completed")
+                )
+                await db.commit()
+                if delivery_file:
+                    await bot.send_document(user_id, delivery_file, caption=custom_message.format(name=name) if custom_message else f"Ваш товар: {name}")
+                else:
+                    await bot.send_message(user_id, custom_message.format(name=name) if custom_message else f"Ваш товар: {name}. Файл отсутствует.")
+                await callback.message.edit_text("Товар выдан бесплатно! Спасибо!")
+                await callback.answer()
+                return
+            
+            invoice_id = await send_payment_request(bot, user_id, product_id, final_price)
             if invoice_id:
                 kb = InlineKeyboardMarkup(inline_keyboard=[
                     [InlineKeyboardButton(text="Оплатить", url=f"https://t.me/CryptoBot?start=inv_{invoice_id}")]
                 ])
                 await callback.message.edit_text(
-                    f"Оплатите товар *{name}* за {amount_usd}$:",
-                    reply_markup=kb
+                    f"Оплатите товар *{name}* за {final_price}$:",
+                    reply_markup=kb,
+                    parse_mode="Markdown"
                 )
                 await callback.answer("Платёж создан! Проверьте ссылку выше.")
             else:
@@ -578,23 +624,7 @@ async def referrals_list_command(callback: CallbackQuery, bot: Bot, state: FSMCo
     await callback.message.answer(text, reply_markup=get_main_menu(is_admin))
     await callback.answer()
 
-@router.message(Command("admin"))
-@router.message(F.text == "Админ-панель")
-async def admin_command(message: Message, bot: Bot, state: FSMContext):
-    if message.from_user.id != ADMIN_ID:
-        await message.answer("Доступ запрещён.")
-        return
-    
-    kb = InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="Добавить товар", callback_data="add_product")],
-        [InlineKeyboardButton(text="Список товаров", callback_data="list_products")],
-        [InlineKeyboardButton(text="Добавить промокод", callback_data="add_promocode")],
-        [InlineKeyboardButton(text="Скидки", callback_data="discounts")],
-        [InlineKeyboardButton(text="Статистика", callback_data="stats")],
-        [InlineKeyboardButton(text="Назад", callback_data="back_to_main")]
-    ])
-    await message.answer("Админ-панель:", reply_markup=kb)
-    await state.set_state(AdminStates.MAIN)
+
 
 @router.callback_query(F.data == "back_to_main")
 async def back_to_main(callback: CallbackQuery, bot: Bot, state: FSMContext):
