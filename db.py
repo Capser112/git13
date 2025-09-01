@@ -1,5 +1,6 @@
 import aiosqlite
 import logging
+from datetime import datetime
 
 DB_PATH = "traffic_shop.db"
 
@@ -22,6 +23,7 @@ async def init_db():
                 desc TEXT,
                 price REAL NOT NULL,
                 category TEXT,
+                subcategory TEXT,
                 delivery_file TEXT
             )
         """)
@@ -69,11 +71,11 @@ async def init_db():
                 payload TEXT
             )
         """)
-        # Тестовые товары
+        # Тестовые товары с подкатегориями
         await db.execute("""
-            INSERT OR IGNORE INTO products (id, name, desc, price, category, delivery_file) VALUES
-            (1, 'Тестовый товар 1', 'Описание тестового товара 1', 10.0, 'Софты', 'file1.txt'),
-            (2, 'Тестовый товар 2', 'Описание тестового товара 2', 20.0, 'Telegram', 'file2.txt')
+            INSERT OR IGNORE INTO products (id, name, desc, price, category, subcategory, delivery_file) VALUES
+            (1, 'Граббер телеграм', 'Граббер для Telegram', 0.0, 'Бесплатное', 'Софты', 'file1.txt'),
+            (2, 'Курс по арбитражу', 'Обучение арбитражу трафика', 20.0, 'Обучения и схемы', 'Курсы', 'file2.txt')
         """)
         await db.commit()
 
@@ -85,9 +87,8 @@ async def use_promocode(user_id: int, code: str) -> int:
             FROM promocodes WHERE code = ?
         """, (code,))
         promo = await cursor.fetchone()
-        if promo and promo[1] < promo[2]:
+        if promo and (promo[2] is None or promo[1] < promo[2]):
             discount, uses_count, max_uses, expiration = promo
-            from datetime import datetime
             if expiration and datetime.strptime(expiration, "%Y-%m-%d %H:%M:%S") < datetime.now():
                 return 0
             await db.execute("""
@@ -100,7 +101,6 @@ async def use_promocode(user_id: int, code: str) -> int:
             return discount
         return 0
 
-
 async def get_purchases_count(user_id: int) -> int:
     """Количество покупок юзера"""
     async with aiosqlite.connect(DB_PATH) as db:
@@ -109,8 +109,15 @@ async def get_purchases_count(user_id: int) -> int:
         return count[0]
 
 async def get_cart_items(user_id: int) -> list:
-    """Получить товары в корзине (заглушка)"""
-    return []  # Позже реализуем полноценную корзину
+    """Получить товары в корзине"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute("""
+            SELECT p.id, p.name, p.price 
+            FROM cart c 
+            JOIN products p ON c.product_id = p.id 
+            WHERE c.user_id = ?
+        """, (user_id,))
+        return await cursor.fetchall()
 
 async def get_user(user_id: int) -> dict:
     """Получить данные юзера"""
@@ -131,7 +138,7 @@ async def get_user(user_id: int) -> dict:
 async def add_user(user_id: int, ref_id: int = None):
     """Добавить юзера"""
     async with aiosqlite.connect(DB_PATH) as db:
-        await db.execute("INSERT INTO users (id, ref_id) VALUES (?, ?)", (user_id, ref_id))
+        await db.execute("INSERT OR IGNORE INTO users (id, ref_id) VALUES (?, ?)", (user_id, ref_id))
         await db.commit()
 
 async def get_referrals_count(user_id: int) -> int:
@@ -147,3 +154,9 @@ async def get_referrals_earnings(user_id: int) -> float:
         cursor = await db.execute("SELECT SUM(earnings) FROM referrals WHERE ref_user_id = ?", (user_id,))
         earnings = await cursor.fetchone()
         return earnings[0] or 0.0
+
+async def remove_from_cart(user_id: int, product_id: int):
+    """Удалить товар из корзины"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute("DELETE FROM cart WHERE user_id = ? AND product_id = ?", (user_id, product_id))
+        await db.commit()

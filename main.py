@@ -1,50 +1,50 @@
 import asyncio
 import logging
-from aiogram import Bot, Dispatcher, types
+from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
-from config import BOT_TOKEN
-from bot import register_handlers
-from admin import register_admin_handlers
+from aiogram.types import BotCommand
+from aiogram.fsm.state import State, StatesGroup
+from bot import router as bot_router
+from admin import router as admin_router
+from config import BOT_TOKEN, ADMIN_ID
 from db import init_db
+#from aiogram.types import DefaultBotProperties
 
 # Настройка логирования
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("logs/bot.log"),
+        logging.FileHandler("bot.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
 
+async def set_commands(bot: Bot):
+    """Установка команд бота"""
+    commands = [
+        BotCommand(command="/start", description="Начать"),
+        BotCommand(command="/catalog", description="Каталог"),
+        BotCommand(command="/profile", description="Профиль"),
+        BotCommand(command="/cart", description="Корзина"),
+        BotCommand(command="/help", description="Помощь"),
+
+    ]
+    await bot.set_my_commands(commands)
+
 async def main():
     logger.info("Starting bot...")
-    
-    # Инициализация бота и диспетчера
     bot = Bot(token=BOT_TOKEN, parse_mode="Markdown")
     dp = Dispatcher(storage=MemoryStorage())
+    dp.include_router(bot_router)
+    dp.include_router(admin_router)
     
-    # Установка команд бота
-    await bot.set_my_commands([
-        types.BotCommand(command="/start", description="Запустить бота"),
-        types.BotCommand(command="/catalog", description="Открыть каталог"),
-        types.BotCommand(command="/profile", description="Посмотреть профиль"),
-        types.BotCommand(command="/cart", description="Открыть корзину"),
-        types.BotCommand(command="/help", description="Инструкция"),
-        types.BotCommand(command="/admin", description="Админ-панель (для админа)")
-    ])
-    
-    # Инициализация БД
     await init_db()
+    await set_commands(bot)
     
-    # Регистрация хэндлеров
-    register_handlers(dp)
-    register_admin_handlers(dp)
-    
-    # Запуск polling
     try:
-        await dp.start_polling(bot)
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
     finally:
         await bot.session.close()
 

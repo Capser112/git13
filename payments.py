@@ -36,7 +36,7 @@ async def send_payment_request(bot: Bot, user_id: int, product_id: int, amount_u
             logging.error(f"Failed to create invoice: {invoice}")
             return None
     except Exception as e:
-        logging.error(f"Error creating invoice: {e}")
+        logging.error(f"Error creating invoice: {e}, Response: {response.text if 'response' in locals() else 'No response'}")
         return None
 
 async def check_invoice(invoice_id: str) -> bool:
