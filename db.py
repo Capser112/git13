@@ -17,14 +17,25 @@ async def init_db():
             )
         """)
         await db.execute("""
+            CREATE TABLE IF NOT EXISTS categories (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                parent_id INTEGER,  -- NULL для категорий, ID категории для подкатегорий
+                UNIQUE(name, parent_id)
+            )
+        """)
+        await db.execute("""
             CREATE TABLE IF NOT EXISTS products (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 desc TEXT,
                 price REAL NOT NULL,
-                category TEXT,
-                subcategory TEXT,
-                delivery_file TEXT
+                category_id INTEGER,
+                subcategory_id INTEGER,  -- NULL, если нет подкатегории
+                delivery_file TEXT,  -- Текст инструкции или file_id
+                media TEXT,  -- file_id для фото/гиф
+                FOREIGN KEY (category_id) REFERENCES categories(id),
+                FOREIGN KEY (subcategory_id) REFERENCES categories(id)
             )
         """)
         await db.execute("""
@@ -71,12 +82,15 @@ async def init_db():
                 payload TEXT
             )
         """)
-        # Тестовые товары с подкатегориями
+        # Тестовые категории
         await db.execute("""
-            INSERT OR IGNORE INTO products (id, name, desc, price, category, subcategory, delivery_file) VALUES
-            (1, 'Граббер телеграм', 'Граббер для Telegram', 0.0, 'Бесплатное', 'Софты', 'file1.txt'),
-            (2, 'Курс по арбитражу', 'Обучение арбитражу трафика', 20.0, 'Обучения и схемы', 'Курсы', 'file2.txt')
+            INSERT OR IGNORE INTO categories (id, name, parent_id) VALUES
+            (1, 'Бесплатное', NULL),
+            (2, 'Обучения и схемы', NULL),
+            (3, 'Софты', 2),
+            (4, 'Обучения', 2)
         """)
+
         await db.commit()
 
 async def use_promocode(user_id: int, code: str) -> int:
@@ -160,3 +174,35 @@ async def remove_from_cart(user_id: int, product_id: int):
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute("DELETE FROM cart WHERE user_id = ? AND product_id = ?", (user_id, product_id))
         await db.commit()
+
+async def get_categories(parent_id: int = None) -> list:
+    """Получить список категорий или подкатегорий"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute(
+            "SELECT id, name FROM categories WHERE parent_id IS ? ORDER BY name",
+            (parent_id,)
+        )
+        return await cursor.fetchall()
+
+async def add_category(name: str, parent_id: int = None) -> bool:
+    """Добавить категорию или подкатегорию"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        try:
+            await db.execute(
+                "INSERT INTO categories (name, parent_id) VALUES (?, ?)",
+                (name, parent_id)
+            )
+            await db.commit()
+            return True
+        except aiosqlite.IntegrityError:
+            return False
+
+async def delete_category(category_id: int) -> bool:
+    """Удалить категорию или подкатегорию"""
+    async with aiosqlite.connect(DB_PATH) as db:
+        cursor = await db.execute("SELECT COUNT(*) FROM products WHERE category_id = ? OR subcategory_id = ?", (category_id, category_id))
+        if (await cursor.fetchone())[0] > 0:
+            return False  # Нельзя удалить, если есть товары
+        await db.execute("DELETE FROM categories WHERE id = ?", (category_id,))
+        await db.commit()
+        return True
